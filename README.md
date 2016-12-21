@@ -1,4 +1,5 @@
 # Gulp Translator
+**Outdated : Work in progress to update**
 > Almost like string replace but using locales
 Now you can use both .json and .yml files.
 
@@ -131,4 +132,4 @@ The string is a path to a nameOfTheFile.yml with your locales. Please look at te
 
 
 # License
-  MIT
+[Mozilla Public License 2.0 (MPL-2.0)](https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2))
