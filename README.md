@@ -132,4 +132,6 @@ The string is a path to a nameOfTheFile.yml with your locales. Please look at te
 
 
 # License
-[Mozilla Public License 2.0 (MPL-2.0)](https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2))
+This work adapted from @arathunku's MIT-licensed (https://github.com/arathunku/gulp-translator).
+
+Further work contribution licensed into [Mozilla Public License 2.0 (MPL-2.0)](https://www.mozilla.org/en-US/MPL/).
