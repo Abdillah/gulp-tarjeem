@@ -35,6 +35,63 @@ describe('gulp-translator', function() {
         contents: content
       }));
     });
+
+    it('should work with other syntaxFunctionName', function() {
+      var translator = gulpTranslator({
+        localeFilePath: './test/locales/ru.json',
+        syntaxFunctionName: 'translate'
+      });
+      var content = new Buffer('translate("title")');
+      var translated = '"Заголовок"';
+
+      var n = 0;
+
+      var _transform = function(file, enc, callback) {
+        assert.equal(file.contents, translated);
+        n++;
+        callback();
+      };
+
+      var _flush = function(callback) {
+        assert.equal(n, 1);
+        callback();
+      };
+
+      var t = through.obj(_transform, _flush);
+      translator.pipe(t);
+      translator.end(new File({
+        contents: content
+      }));
+    });
+
+    it('should use supplied syntaxPattern instead of the default regex with syntaxFunctionName specified', function() {
+      var translator = gulpTranslator({
+        localeFilePath: './test/locales/ru.json',
+        syntaxPattern: /(^|[^\w_\$])transl\([\"\']([^\"\']+)[\"\']\)/g,
+        syntaxFunctionName: 'translate'
+      });
+      var content = new Buffer('transl("title")');
+      var translated = '"Заголовок"';
+
+      var n = 0;
+
+      var _transform = function(file, enc, callback) {
+        assert.equal(file.contents, translated);
+        n++;
+        callback();
+      };
+
+      var _flush = function(callback) {
+        assert.equal(n, 1);
+        callback();
+      };
+
+      var t = through.obj(_transform, _flush);
+      translator.pipe(t);
+      translator.end(new File({
+        contents: content
+      }));
+    });
   });
 
   describe('with null contents', function() {
