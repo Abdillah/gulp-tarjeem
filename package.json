@@ -1,12 +1,12 @@
 {
-  "name": "gulp-translator",
+  "name": "gulp-tarjeem",
   "main": "translator-gulp.js",
-  "version": "0.2.0",
-  "description": "Translate your files by using {{ syntax }} and locales/something.yml or *.json files.",
-  "licence": "MIT",
+  "version": "0.1.0",
+  "description": "Translate your files by using transl() syntax and locales/something.yml or *.json files.",
+  "licence": "MPL-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/arathunku/gulp-translator"
+    "url": "git://github.com/Abdillah/gulp-tarjeem"
   },
   "keywords": [
     "gulpplugin",
@@ -18,7 +18,11 @@
     "translator",
     "gulp"
   ],
-  "author": "arathunku <arathunku@gmail.com>",
+  "author": "Hernawan Fa'iz Abdillah <hernawan.faiz@abdillah.me>",
+  "contributors": [{
+    "name" : "Arathunku",
+    "email" : "arathunku@gmail.com"
+  }],
   "dependencies": {
     "through2": "0.6.1",
     "gulp-util": "3.0.0",
