@@ -1,28 +1,28 @@
-# Gulp Translator
-**Outdated : Work in progress to update**
-> Almost like string replace but using locales
-Now you can use both .json and .yml files.
+# Gulp Tarjeem
+> Javascript translation which compile the source into many locales.
+
 
 ## Usage
-
-First, install `gulp-translator` as a development dependency:
+### In gulpfile.js
+First, install `gulp-tarjeem` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-translator
+# Not published yet :(
+npm install --save-dev gulp-tarjeem
 ```
 
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var translate = require('gulp-translator');
+var translate = require('gulp-tarjeem');
 
 gulp.task('translate', function() {
-  var translations = ['pl', 'en'];
+  var translations = ['en', 'id'];
 
   translations.forEach(function(translation){
-    gulp.src('app/views/**/*.html')
+    gulp.src('app/script/**/*.js')
       .pipe(translate(options))
-      .pipe(gulp.dest('dist/views/' + translation));
+      .pipe(gulp.dest('dist/script/' + translation));
   });
 });
 ```
@@ -30,105 +30,111 @@ gulp.task('translate', function() {
 or better, handle errors:
 ```javascript
 gulp.task('translate', function() {
-  var translations = ['pl', 'en'];
+  var translations = ['en', 'id'];
 
   translations.forEach(function(translation){
-    gulp.src('app/views/**/*.html')
+    gulp.src('app/script/**/*.js')
       .pipe(
         translate(options)
         .on('error', function(){
           console.error(arguments);
         })
       )
-      .pipe(gulp.dest('dist/views/' + translation));
+      .pipe(gulp.dest('dist/script/' + translation));
   });
 });
 ```
 
-## Options
+### In your locales
+You may put locale in a directory with language abbrev as it's name.
 
-
-`options` in `translate` function is:
-  * `String` Path to locale file.
-  * `Object`
-    * `.localePath` String. Optional. Path to locale file.
-    Or you can use `.lang`, `.localeDirectory`.
-    * `.lang` String. Optional. Target language.
-    * `.localeDirectory` String. Optional. Directory with locale files.
-    If no `.localePath` specified, try construct it from `.localeDirectory + .lang`.
-    * `.localeExt` String. Optional. If you specify path to file will transform
-     `newLocalePath = oldLocalePath + .localExt`.
-    * `.pattern` RegExp. Optional. Pattern to find strings to replace. You can specify your own pattern.
-    To transform strings without translate.
-    Default: `/\{{2}([\w\.\s\"\']+\s?\|\s?translate[\w\s\|]*)\}{2}/g`
-    * `.patternSplitter` String. Some to split parts of transform. Default: `'|'`.
-    * `.transform` Object. Every field is you transform function.
-    First argument is an `content` to transform it.
-    Second is an dictionary, that you specified.
-    Function should return transformed string or `Error` object with some message.
-
-
-
-## Usage
-
-I'm using angular-like syntax. Expressions in `{{}}` with ` | translate `
-filter will be translated.
-
-Following examples assume that "title" in locales equals "new TITLE"
-
-Example:
+**locales/en.json**
 ```
-{{ title | translate }} will be change to "new TITLE"
-
+{ "title": "My New Gulp Plugin, Call It Tarjeem" }
 ```
-If you'd like to use filters(look at the bottom to check available filters) just pass them after like that:
 
+**locales/id.json**
 ```
-{{ title | translate | lowercase }} will be change to "new title"
-
+{ "title": "Plugin Gulp Baru Milikku, Panggil Dia Tarjeem" }
 ```
 
 
-```
-{{ title | translate | uppercase }} will be change to "NEW TITLE"
+### In your script.js
+Then you can "calling" `transl` plugin with an argument of a key in your locales
+you specified earlier.
 
+Something like this will do,
+```
+document.getElementById('title').text(transl("title"))
 ```
 
+will be compiled into
+```
+// File: en/script.js
+document.getElementById('title').text("My New Gulp Plugin, Call It Tarjeem")
+```
+```
+// File: id/script.js
+document.getElementById('title').text("Plugin Gulp Baru Milikku, Panggil Dia Tarjeem")
+```
 
 If you're still not sure, please look at tests.
 
+
 ## API
+### translate(localeFilePath)
+`gulp-tarjeem` is called with a string
 
-gulp-translator is called with a string
-
-### translate(string)
-
-#### string
+#### localeFilePath
 Type: `String`
 
 The string is a path to a nameOfTheFile.yml with your locales. Please look at test/locales for examples.
 
-## Available filters:
+### translate(options)
+`gulp-tarjeem` is called with an object
 
-  - lowercase
-  - uppercase
-  - capitalize to capitalize only first word.
-  - capitalizeEvery  to capitalize every word.
-  - reverse
+#### options
+Type: `Object`
 
-## User filters:
-
-  You also can specify your own filters.
-  Just add them to `.transform` parameter of `options`.
+An `Object` with the following properties that affect how this plugin works,
+* `.localeFilePath` String. Optional. Path to locale file.
+  Or you can use `.localeLang` and `.localeDirectory`.
+  But to note, this option has highest priority.
+* `.localeFileExt` String. Optional. If you specify path to file will transform
+  `newLocalePath = oldLocalePath + .localeExt`.
+* `.localeLang` String. Optional. Target language.
+* `.localeDirectory` String. Optional. Directory with locale files.
+  If no `.localeFilePath` specified, try construct it from `.localeDirectory + .localeLang`.
+* `.localeDictionary` Object. Dictionary to lookup instead of locale specified above.
+  If you specify this, another `locale*` properties will be ignored.
+* `.syntaxPattern` RegExp. Optional. Pattern to find strings to replace. You can specify your own pattern.<br/>
+  Default: `/(^|[^\w_\$])transl\([\"\']([^\"\']+)[\"\']\)/g`
+* `.syntaxFunctionName` String. Function name to match.<br/>
+  Default: `transl`
+* `.translate` Function.
   First argument is an `content` to transform it.
   Second is an dictionary, that you specified.
   Function should return transformed string or `Error` object with some message.
 
 
-## TODO:
+## Tips & Trick
+This plugin is actually very flexible. A String in Javascript can be chained with
+built in method such as `toUpperCase()`, `toLowerCase()`. So, you can do lots of things.
 
-  - refactor tests
-  - work on matchers (sigh...)
+```
+// Chain with .toUpperCase()
+var message1 = transl("title").toUpperCase();
+
+// Process with function
+var message2 = String.toUpperCase(transl("title"));
+
+// Chain to replace a placeholder
+var message3 = transl("title").replace(':year', new Date.getFullYear());
+```
+
+## TODO:
+- refactor tests
+- work on matchers (sigh...)
 
 
 # License
