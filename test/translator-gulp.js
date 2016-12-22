@@ -6,6 +6,37 @@ var Stream = require('stream');
 var gulpTranslator = require('../translator-gulp.js');
 
 describe('gulp-translator', function() {
+  describe('with varied options properties', function() {
+    it('should use localeFilePath rather than localeDirectory', function() {
+      var translator = gulpTranslator({
+        localeFilePath: './test/locales/ru.json',
+        localeDirectory: './test/locales',
+        localeLang: 'en'
+      });
+      var content = new Buffer('transl("title")');
+      var translated = '"Заголовок"';
+
+      var n = 0;
+
+      var _transform = function(file, enc, callback) {
+        assert.equal(file.contents, translated);
+        n++;
+        callback();
+      };
+
+      var _flush = function(callback) {
+        assert.equal(n, 1);
+        callback();
+      };
+
+      var t = through.obj(_transform, _flush);
+      translator.pipe(t);
+      translator.end(new File({
+        contents: content
+      }));
+    });
+  });
+
   describe('with null contents', function() {
     it('should let null files pass through', function(done) {
       var translator = gulpTranslator('./test/locales/en.yml');
