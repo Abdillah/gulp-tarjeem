@@ -5,7 +5,7 @@ var PluginError = gutil.PluginError;
 
 var Translator = require("./lib/translator.js");
 
-const PLUGIN_NAME = 'gulp-translator';
+const PLUGIN_NAME = 'gulp-tarjeem';
 
 var plugin = function (options) {
   var translator = new Translator(options);
