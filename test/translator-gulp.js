@@ -66,7 +66,7 @@ describe('gulp-translator', function() {
     it('should interpolate strings  from *.yml locale file - ENGLISH', function(done) {
       var translator = gulpTranslator('./test/locales/en.yml');
       var n = 0;
-      var content = new Buffer("trans(\"user.title\") + trans(\"title\")");
+      var content = new Buffer("transl(\"user.title\") + transl(\"title\")");
       var translated =  "ENGLISH USER TITLE" + "Title";
 
       var _transform = function(file, enc, callback) {
@@ -91,7 +91,7 @@ describe('gulp-translator', function() {
     it('should interpolate strings  from *.yml locale file - POLISH', function(done) {
       var translator = gulpTranslator('./test/locales/pl.yml');
       var n = 0;
-      var content = new Buffer("trans(\"user.title\") + trans(\"title\")");
+      var content = new Buffer("transl(\"user.title\") + transl(\"title\")");
       var translated = "POLSKI TYTUL" + "Tytul";
 
       var _transform = function(file, enc, callback) {
@@ -116,7 +116,7 @@ describe('gulp-translator', function() {
     it('should interpolate strings from *.json locale file - RUSSIAN', function(done) {
       var translator = gulpTranslator('./test/locales/ru.json');
       var n = 0;
-      var content = new Buffer("trans(\"user.title\") + trans(\"title\")");
+      var content = new Buffer("transl(\"user.title\") + transl(\"title\")");
       var translated = "РУССКИЙ ЗАГОЛОВОК" + "Заголовок";
 
       var _transform = function(file, enc, callback) {
@@ -141,7 +141,7 @@ describe('gulp-translator', function() {
     it("should throw error about undefined locale", function(done){
       var translator = gulpTranslator('./test/locales/pl.yml');
       var n = 0;
-      var content = new Buffer("trans(\"unsupported\")");
+      var content = new Buffer("transl(\"unsupported\")");
 
       var _transform = function(file, enc, callback) {
         n++;
@@ -168,11 +168,11 @@ describe('gulp-translator', function() {
       }));
     });
 
-    it('should not translate native function resemble trans()', function () {
+    it('should not translate native function resemble transl()', function () {
       var translator = gulpTranslator('./test/locales/en.yml');
       var n = 0;
-      var content = new Buffer("intrans(\"argument\") + trans(\"title\")");
-      var translated =  "intrans(\"argument\") + \"Title\"";
+      var content = new Buffer("intransl(\"argument\") + transl(\"title\")");
+      var translated =  "intransl(\"argument\") + \"Title\"";
 
       var _transform = function(file, enc, callback) {
         assert.equal(file.contents.toString('utf8'), translated);
