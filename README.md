@@ -1,5 +1,6 @@
 # Gulp Tarjeem
-> Javascript translation which compile the source into many locales.
+Modular advice: "Do one thing and do it well"
+> Function-style javascript translation which compile the source into many locales.
 
 
 ## Usage
@@ -107,8 +108,6 @@ An `Object` with the following properties that affect how this plugin works,
   If no `.localeFilePath` specified, try construct it from `.localeDirectory + .localeLang`.
 * `.localeDictionary` Object. Dictionary to lookup instead of locale specified above.
   If you specify this, another `locale*` properties will be ignored.
-* `.syntaxPattern` RegExp. Optional. Pattern to find strings to replace. You can specify your own pattern.<br/>
-  Default: `/(^|[^\w_\$])transl\([\"\']([^\"\']+)[\"\']\)/g`
 * `.syntaxFunctionName` String. Function name to match.<br/>
   Default: `transl`
 * `.translate` Function.
