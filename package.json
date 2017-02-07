@@ -2,7 +2,7 @@
   "name": "gulp-tarjeem",
   "main": "translator-gulp.js",
   "version": "0.1.0",
-  "description": "Translate your files by using transl() syntax and locales/something.yml or *.json files.",
+  "description": "Gulp plugin with function-style, dictionary agnostic which compile javascript source codes into localized scripts.",
   "licence": "MPL-2.0",
   "repository": {
     "type": "git",
