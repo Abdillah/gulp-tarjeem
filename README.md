@@ -108,12 +108,16 @@ Type: `Object`
 
 An `Object` with the following properties that affect how this plugin works,
 * `.dictionaryFilePath` String. Path to locale file.
-* `.dictionaryTransformer` Function. Custom function to convert whatever `dictionaryFilePath`
-  content might be into Javascript key-value object.
 * `.dictionaryObject` Object. Dictionary to lookup instead of locale specified above.
   If you specify this, `dictionaryFilePath` property will be ignored.
 * `.syntaxFnName` String. Function name to match.<br/>
   Default: `transl`
+* `.fileToDictFn` Function, signature `function(filecontent) => Object`.
+  Custom function to convert whatever `dictionaryFilePath` content might be into Javascript key-value object.
+* `.translatorFn` Function, signature `function(key, dictionary) => string`.
+  Custom function to convert translation key into translated output string. <br/>
+  Default: Convert dot-separated namespace `"some.name.space"` into
+    `dictionaryObject['some']['name']['space']`.
 
 ## Tips & Trick
 This plugin is actually very flexible. A String in Javascript can be chained with
