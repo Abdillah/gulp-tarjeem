@@ -1,7 +1,7 @@
 {
   "name": "gulp-tarjeem",
   "main": "translator-gulp.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Gulp plugin with function-style, dictionary agnostic which compile javascript source codes into localized scripts.",
   "licence": "MPL-2.0",
   "repository": {
