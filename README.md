@@ -60,12 +60,12 @@ You may put locale in a directory with language abbrev as it's name.
 
 **locales/en.json**
 ```
-{ "title": "My New Gulp Plugin, Call It Tarjeem" }
+{ "title": "My new Gulp plugin, call it Tarjeem" }
 ```
 
 **locales/id.json**
 ```
-{ "title": "Plugin Gulp Baru Milikku, Panggil Dia Tarjeem" }
+{ "title": "Plugin Gulp baru milik saya, sebut saja Tarjeem" }
 ```
 
 
@@ -81,11 +81,11 @@ document.getElementById('title').text(transl("title"))
 will be compiled into
 ```
 // File: en/script.js
-document.getElementById('title').text("My New Gulp Plugin, Call It Tarjeem")
+document.getElementById('title').text("My new Gulp plugin, call it Tarjeem")
 ```
 ```
 // File: id/script.js
-document.getElementById('title').text("Plugin Gulp Baru Milikku, Panggil Dia Tarjeem")
+document.getElementById('title').text("Plugin Gulp baru milik saya, sebut saja Tarjeem")
 ```
 
 If you're still not sure, please look at tests.
