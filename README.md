@@ -112,7 +112,7 @@ An `Object` with the following properties that affect how this plugin works,
   content might be into Javascript key-value object.
 * `.dictionaryObject` Object. Dictionary to lookup instead of locale specified above.
   If you specify this, `dictionaryFilePath` property will be ignored.
-* `.syntaxFunctionName` String. Function name to match.<br/>
+* `.syntaxFnName` String. Function name to match.<br/>
   Default: `transl`
 
 ## Tips & Trick
