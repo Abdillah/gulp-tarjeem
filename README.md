@@ -92,13 +92,13 @@ If you're still not sure, please look at tests.
 
 
 ## API
-### translate(localeFilePath)
+### translate(dictionaryFilePath)
 `gulp-tarjeem` is called with a string
 
-#### localeFilePath
+#### dictionaryFilePath
 Type: `String`
 
-The string is a path to a nameOfTheFile.yml with your locales. Please look at test/locales for examples.
+The string is a path to a locale-file-name.js with your locales. Please look at test/locales for examples.
 
 ### translate(options)
 `gulp-tarjeem` is called with an object
