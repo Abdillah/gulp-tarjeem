@@ -102,7 +102,7 @@ An `Object` with the following properties that affect how this plugin works,
   Or you can use `.localeLang` and `.localeDirectory`.
   But to note, this option has highest priority.
 * `.localeFileExt` String. Optional. If you specify path to file will transform
-  `newLocalePath = oldLocalePath + .localeExt`.
+  `newLocalePath = oldLocalePath + .localeFileExt`.
 * `.localeLang` String. Optional. Target language.
 * `.localeDirectory` String. Optional. Directory with locale files.
   If no `.localeFilePath` specified, try construct it from `.localeDirectory + .localeLang`.
