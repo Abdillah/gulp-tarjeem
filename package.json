@@ -26,8 +26,7 @@
   "dependencies": {
     "through2": "0.6.1",
     "gulp-util": "3.0.0",
-    "q": "1.0.1",
-    "yamljs": "^0.2.1"
+    "q": "1.0.1"
   },
   "devDependencies": {
     "gulp": "3.8.7",
