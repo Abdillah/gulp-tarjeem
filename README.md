@@ -1,7 +1,16 @@
 # Gulp Tarjeem
-Modular advice: "Do one thing and do it well"
-> Function-style javascript translation which compile the source into many locales.
+Here in short this Gulp plugin is,
+> Function-style, dictionary agnostic translation gulp plugin which compile
+> javascript source codes into localized scripts.
 
+## "Do one thing and do it well"
+This project restricted to, or only feature
+* Function-styled
+* Compile javascript source code to localized scripts
+* Dictionary agnostic (as long as it converted to JSON)
+* One dictionary into one output for each file passed through
+
+If above points deviated, please report a bug.
 
 ## Usage
 ### In gulpfile.js
@@ -98,23 +107,13 @@ The string is a path to a nameOfTheFile.yml with your locales. Please look at te
 Type: `Object`
 
 An `Object` with the following properties that affect how this plugin works,
-* `.localeFilePath` String. Optional. Path to locale file.
-  Or you can use `.localeLang` and `.localeDirectory`.
-  But to note, this option has highest priority.
-* `.localeFileExt` String. Optional. If you specify path to file will transform
-  `newLocalePath = oldLocalePath + .localeFileExt`.
-* `.localeLang` String. Optional. Target language.
-* `.localeDirectory` String. Optional. Directory with locale files.
-  If no `.localeFilePath` specified, try construct it from `.localeDirectory + .localeLang`.
-* `.localeDictionary` Object. Dictionary to lookup instead of locale specified above.
-  If you specify this, another `locale*` properties will be ignored.
+* `.dictionaryFilePath` String. Path to locale file.
+* `.dictionaryTransformer` Function. Custom function to convert whatever `dictionaryFilePath`
+  content might be into Javascript key-value object.
+* `.dictionaryObject` Object. Dictionary to lookup instead of locale specified above.
+  If you specify this, `dictionaryFilePath` property will be ignored.
 * `.syntaxFunctionName` String. Function name to match.<br/>
   Default: `transl`
-* `.translate` Function.
-  First argument is an `content` to transform it.
-  Second is an dictionary, that you specified.
-  Function should return transformed string or `Error` object with some message.
-
 
 ## Tips & Trick
 This plugin is actually very flexible. A String in Javascript can be chained with
